@@ -15,6 +15,7 @@ class Course(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     duration = models.IntegerField()
     teacher = models.ForeignKey(Teacher,on_delete=models.CASCADE)
+    teacher_name = models.CharField(max_length=40, null=True)
     fee = models.IntegerField(null=True)
     mobile_num = models.CharField(max_length=12,)
 

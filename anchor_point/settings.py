@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'course',
     'student',
     'teacher',
+    'users',
     'rest_framework',
     'corsheaders',
 
