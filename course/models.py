@@ -6,6 +6,7 @@ from student.models import Student
 class Category(models.Model):
     category_name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=30)
+    image = models.ImageField(upload_to='category/images',null=True)
     def __str__(self) -> str:
         return self.category_name
     
