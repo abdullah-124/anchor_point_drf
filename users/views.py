@@ -5,6 +5,7 @@ from .serializers import UserSerialzer, RegistrationSerializer,LoginSerializer
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import login,logout
+from django.http import JsonResponse
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -21,20 +22,29 @@ class RegestrationApi_view(APIView):
         if serializer.is_valid():
             user = serializer.save()
             login(user)
-            return Response('Account created')
+            return JsonResponse({'message':'Account created'})
         return Response(serializer.errors)
     
 
 
 class LoginApiView(APIView):
     def post(self,request):
-        serializer = LoginSerializer(data=self.request.data)
+        serializer = LoginSerializer(data=request.data)
+        print(self.request.data)
         if(serializer.is_valid()):
             username = serializer.validated_data['username']
             password = serializer.validated_data['password']
+            print(username,password)
             user = authenticate(username = username,password=password)
             if user :
-                login(user)
+                login(self.request,user)
+                return JsonResponse({'message': 'Login successful'})
             else :
-                return Response('Invalid credential')
-        return Response(serializer.errors)
+                return JsonResponse({'message': 'Invalid credentials'}, status=401)
+        else:
+            return JsonResponse({'message': 'Methods not allowed'}, status=405)
+    
+{
+"username":"mdsakib",
+"password":"lino1234"
+}

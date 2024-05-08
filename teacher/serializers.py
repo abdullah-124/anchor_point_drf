@@ -3,6 +3,7 @@ from .models import Teacher
 from django.contrib.auth.models import User
 
 class TeacherSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(many=False)
     class Meta:
         model = Teacher
         fields = '__all__'
