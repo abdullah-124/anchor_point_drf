@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from .serializers import UserSerialzer, RegistrationSerializer,LoginSerializer
+from student.models import Student
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import login,logout
@@ -52,7 +53,9 @@ class LoginApiView(APIView):
             user = authenticate(username = username,password=password)
             if user :
                 # token,create = Token.objects.get_or_create(user = user)
-                return JsonResponse({'message': 'Login successful',"user":user.id})
+                student = Student.objects.get(user = user.id)
+                # print(student)
+                return JsonResponse({'message': 'Login successful',"user":user.id, "student_id":student.id})
             else :
                 return JsonResponse({'message': 'Invalid credentials'}, status=401)
         else:

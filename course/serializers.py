@@ -12,6 +12,11 @@ class EnrollSerializer(serializers.ModelSerializer):
         model = Enroll
         fields = '__all__'
 
+class CheckoutSerializer(serializers.Serializer):
+    course_id = serializers.IntegerField(required=True)
+    user_id = serializers.IntegerField(required=True)
+    mobile_number = serializers.CharField(max_length=12,required=True)
+
 class ReviewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviews

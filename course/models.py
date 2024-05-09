@@ -37,7 +37,7 @@ class Reviews(models.Model):
     star = models.CharField(max_length=5, choices=STAR_REVIEW)
 
 class Enroll(models.Model):
-    course = models.ForeignKey(Course,on_delete=models.CASCADE)
+    course = models.ForeignKey(Course,on_delete=models.CASCADE,null=True)
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length=12)
     date_of_enroll = models.DateTimeField(auto_now_add=True)

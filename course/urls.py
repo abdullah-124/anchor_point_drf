@@ -9,5 +9,6 @@ router.register('enroll', views.EnrollView)
 router.register('reviews', views.ReviewsView)
 
 urlpatterns = [
-    path('',include(router.urls))
+    path('',include(router.urls)),
+    path('checkout/',views.CheckoutApiView.as_view(),name='checkout')
 ]
