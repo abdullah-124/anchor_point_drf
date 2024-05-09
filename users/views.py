@@ -21,13 +21,14 @@ class RegestrationApi_view(APIView):
         serializer = self.serializer_class(data = request.data)
         if serializer.is_valid():
             user = serializer.save()
-            login(user)
-            return JsonResponse({'message':'Account created'})
+            # login(user)
+            return JsonResponse({'message':'Account created, please login'})
         return Response(serializer.errors)
     
 
 
 class LoginApiView(APIView):
+    serializer_class = LoginSerializer
     def post(self,request):
         serializer = LoginSerializer(data=request.data)
         print(self.request.data)
@@ -38,7 +39,7 @@ class LoginApiView(APIView):
             user = authenticate(username = username,password=password)
             if user :
                 login(self.request,user)
-                return JsonResponse({'message': 'Login successful'})
+                return JsonResponse({'message': 'Login successful',"user":user.id})
             else :
                 return JsonResponse({'message': 'Invalid credentials'}, status=401)
         else:
