@@ -9,4 +9,5 @@ urlpatterns = [
     path('',include(router.urls)),
     path('registration/', views.RegestrationApi_view.as_view(), name='register'),
     path('login/', views.LoginApiView.as_view(), name='login'),
+    path('active/<uid64>/<token>/',views.activate,name='active')
 ]
