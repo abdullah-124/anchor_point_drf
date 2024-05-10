@@ -42,7 +42,7 @@ class CheckoutApiView(APIView):
             user_id = serializer.validated_data['user_id']
             mobile_number = serializer.validated_data['mobile_number']
             user = User.objects.get(id=user_id)
-            student,_ = Student.objects.get_or_create(user = user)
+            student = Student.objects.get(user = user)
             student.save()
             course = Course.objects.get(id=course_id)
             enroll_course = Enroll.objects.create(student=student,course=course,mobile_number=mobile_number)
